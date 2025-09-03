@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego Groovy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Vinyl&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-enter"></div>
+  <div id="contenedor"></div>
+
+  <script>
+    const preguntas = [
+      { 
+        texto: "¿Cuál es la capital de Francia?", 
+        respuesta: "paris", 
+        pista: "Busca en el PATIO CENTRAL la palabra clave.", 
+        clave: "luna", 
+        tema: "groovy1"
+      },
+      { 
+        texto: "¿Quién escribió Don Quijote?", 
+        respuesta: "cervantes", 
+        pista: "Ve a la BIBLIOTECA para encontrar la clave.", 
+        clave: "sol", 
+        tema: "groovy2"
+      },
+      { 
+        texto: "¿Cuánto es 7 x 8?", 
+        respuesta: "56", 
+        pista: "La pista está en el GIMNASIO.", 
+        clave: "estrella", 
+        tema: "groovy3"
+      },
+      { 
+        texto: "¿Cuál es el océano más grande?", 
+        respuesta: "pacifico", 
+        pista: "Revisa el SALÓN DE ARTE.", 
+        clave: "mariposa", 
+        tema: "groovy4"
+      },
+      { 
+        texto: "¿En qué año llegó el hombre a la Luna?", 
+        respuesta: "1969", 
+        pista: "Pista escondida en el LABORATORIO.", 
+        clave: "flor", 
+        tema: "groovy5"
+      }
+    ];
+
+    const ordenEquipos = {
+      1: [0,1,2,3,4],
+      2: [2,3,1,4,0],
+      3: [4,2,0,1,3],
+      4: [1,4,3,0,2],
+      5: [3,0,4,2,1]
+    };
+
+    const equipo = localStorage.getItem("equipo");
+    let indice = parseInt(localStorage.getItem("indicePregunta"));
+    const orden = ordenEquipos[equipo];
+
+    function mostrarPregunta() {
+      if (indice >= orden.length) {
+        document.getElementById("contenedor").innerHTML = `
+          <h2>🌼 ¡Juego terminado! 🌼</h2>
+          <p>¡Buen trabajo, Equipo ${equipo}!</p>
+        `;
+        document.body.className = ""; // quitar fondo
+        return;
+      }
+
+      const actual = preguntas[orden[indice]];
+      document.body.className = actual.tema; // fondo groovy distinto
+
+      document.getElementById("contenedor").innerHTML = `
+        <h2>Pregunta ${indice+1}</h2>
+        <p>${actual.texto}</p>
+        <form id="form-pregunta">
+          <input type="text" id="respuesta" placeholder="Tu respuesta">
+          <button type="submit">Enviar</button>
+        </form>
+        <div id="mensaje"></div>
+      `;
+
+      document.getElementById("form-pregunta").onsubmit = (e) => {
+        e.preventDefault();
+        const valor = document.getElementById("respuesta").value.trim().toLowerCase();
+        if (valor === actual.respuesta) {
+          document.getElementById("mensaje").innerHTML = `
+            ✅ Correcto.<br>
+            ${actual.pista}<br><br>
+            <form id="form-clave">
+              <input type="text" id="clave" placeholder="Introduce la clave encontrada">
+              <button type="submit">Desbloquear</button>
+            </form>
+            <div id="mensajeClave"></div>
+          `;
+          document.getElementById("form-clave").onsubmit = (ev) => {
+            ev.preventDefault();
+            const clave = document.getElementById("clave").value.trim().toLowerCase();
+            if (clave === actual.clave) {
+              document.getElementById("mensajeClave").innerHTML = `
+                ✅ ¡Clave correcta!<br>
+                <button onclick="siguiente()">Siguiente pregunta</button>
+              `;
+            } else {
+              document.getElementById("mensajeClave").innerText = "❌ Clave incorrecta, revisa la pista.";
+            }
+          };
+        } else {
+          document.getElementById("mensaje").innerText = "❌ Respuesta incorrecta. Intenta de nuevo.";
+        }
+      };
+    }
+
+    function siguiente() {
+      indice++;
+      localStorage.setItem("indicePregunta", indice);
+      mostrarPregunta();
+      activarCortina();
+    }
+
+    function activarCortina() {
+      const cortina = document.createElement("div");
+      cortina.classList.add("page-enter");
+      document.body.appendChild(cortina);
+      setTimeout(() => cortina.remove(), 1500);
+    }
+
+    mostrarPregunta();
+  </script>
+</body>
+</html>

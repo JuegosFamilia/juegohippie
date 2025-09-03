@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego de Pistas - Inicio</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Vinyl&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Selecciona tu equipo</h1>
+  <button onclick="elegirEquipo(1)">Equipo 1</button>
+  <button onclick="elegirEquipo(2)">Equipo 2</button>
+  <button onclick="elegirEquipo(3)">Equipo 3</button>
+  <button onclick="elegirEquipo(4)">Equipo 4</button>
+  <button onclick="elegirEquipo(5)">Equipo 5</button>
+
+  <script>
+    function elegirEquipo(num) {
+      localStorage.setItem("equipo", num);
+      localStorage.setItem("indicePregunta", 0);
+      window.location.href = "juego.html";
+    }
+  </script>
+</body>
+</html>
