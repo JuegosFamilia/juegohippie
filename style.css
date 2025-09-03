@@ -85,6 +85,29 @@ h1, h2, p, label {
        0px  0px 3px #000; /* halo extra */
 }
 
+.botones-piramide {
+    display: flex;
+    flex-direction: column;   /* columna vertical */
+    align-items: center;      /* centra horizontalmente */
+    gap: 8px;                 /* separación entre botones */
+    margin-top: 2rem;
+}
+
+/* Ajuste responsivo */
+@media (max-width: 480px) {
+    .botones-piramide {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .botones-piramide button:nth-child(1) {
+        grid-column: 1 / span 2;
+    }
+    .botones-piramide button:nth-child(4),
+    .botones-piramide button:nth-child(5) {
+        grid-column: auto;
+    }
+}
+
+
 @keyframes wave {
     0% { transform: rotate(0deg); }
     25% { transform: rotate(2deg); }

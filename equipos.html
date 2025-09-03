@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego Años 70</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rubik+Vinyl&display=swap" rel="stylesheet">
+</head>
+<body>
+  <h1>Selecciona tu equipo</h1>
+  <div class="botones-piramide">
+    <button class="groovy1" onclick="elegirEquipo(1)">Equipo Age of Aquarius</button>
+    <button class="groovy2" onclick="elegirEquipo(2)">Equipo Let the sun shine in</button>
+    <button class="groovy3" onclick="elegirEquipo(3)">Equipo Harmony and understanding</button>
+    <button class="groovy4" onclick="elegirEquipo(4)">Equipo Sympathy and trust</button>
+    <button class="groovy5" onclick="elegirEquipo(5)">Equipo Mind's true liberation</button>
+  </div>
+  
+
+  <!-- Audio: se reproducirá en loop -->
+  <audio id="themeAudio" src="Aquarius__Let_The_Sun_Shine_In.mp3" autoplay loop></audio>
+
+  <script>
+    function elegirEquipo(num) {
+      localStorage.setItem("equipo", num);
+      localStorage.setItem("indicePregunta", 0);
+      window.location.href = "juego.html";
+    }
+
+   
+  const audio = document.getElementById('themeAudio');
+
+  audio.addEventListener('loadedmetadata', () => {
+    // Tiempo de inicio en segundos
+    audio.currentTime = 90; 
+    audio.play().catch(e => console.log("Audio bloqueado:", e));
+  });
+</script>
+
+</body>
+</html>
