@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <title>Juego Años 70</title>
@@ -9,6 +10,7 @@
     input {
       text-transform: uppercase; /* siempre en mayúsculas */
     }
+
     .pregunta-img {
       max-width: 80%;
       border: 4px solid #fff;
@@ -16,11 +18,16 @@
       margin: 1rem auto;
       display: block;
     }
-    audio {
+
+    iframe.spotify-player {
       margin: 1rem 0;
+      border: none;
+      border-radius: 12px;
     }
+
     /* Estilo normal para el texto de las preguntas y pistas */
-    .pregunta-texto, .pista-texto {
+    .pregunta-texto,
+    .pista-texto {
       text-shadow: none !important;
       font-family: 'Rubik', sans-serif;
       font-size: 18px;
@@ -28,15 +35,32 @@
       line-height: 1.5;
       margin: 0.5rem 0;
     }
-    #mensaje, #mensajeClave {
+
+    #mensaje,
+    #mensajeClave {
       margin-top: 1rem; /* espacio entre respuesta y pista */
       font-size: 18px;
     }
+
     #mensajeClave {
       margin-bottom: 1rem; /* separa del siguiente botón */
     }
+
+    .intro-cancion {
+      font-weight: bold;
+      font-size: 20px;
+      color: #333;
+    }
+
+    .mensaje-correcto {
+      font-weight: bold;
+      font-size: 20px;
+      margin-bottom: 1rem;
+      color: green;
+    }
   </style>
 </head>
+
 <body>
   <div class="page-enter"></div>
   <div id="contenedor"></div>
@@ -52,36 +76,40 @@
         imagen: "img/boda.jpeg"
       },
       {
-        // Pregunta 2 con versiones según el equipo
         versiones: {
           1: {
             texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>
 Giraros hacia el resto de los equipos y cantar el trozo de canción que os ha tocado.<br>
-Por lo menos uno de los miembros del equipo tiene que cantar<br></span<br>Libre Como el Sol cuando amanece <br>Yo soy libre como el mar <br>Libre Como el ave que escapó de su prisión <br>Y puede, al fin, volar <br>Libre Como el viento que recoge mi lamento y mi pesar <br>Camino sin cesar <br>Detrás de la verdad <br>Y sabré lo que es al fin, la ____`,
+Por lo menos uno de los miembros del equipo tiene que cantar<br></span><br>
+Libre Como el Sol cuando amanece <br>Yo soy libre como el mar <br>Libre Como el ave que escapó de su prisión <br>Y puede, al fin, volar <br>Libre Como el viento que recoge mi lamento y mi pesar <br>Camino sin cesar <br>Detrás de la verdad <br>Y sabré lo que es al fin, la ____`,
             respuesta: "LIBERTAD"
           },
           2: {
             texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>
 Giraros hacia el resto de los equipos y cantar el trozo de canción que os ha tocado.<br>
-Por lo menos uno de los miembros del equipo tiene que cantar<br></span><br>Hay una chica que es igual <br>Pero distinta a las demás <br>La veo todas las noches <br>Por la playa pasear <br>Y no sé de dónde viene <br>Y no sé a dónde va <br>Hace tiempo que sueño con ella <br>Y solo sé que se llama ____`,
+Por lo menos uno de los miembros del equipo tiene que cantar<br></span><br>
+Hay una chica que es igual <br>Pero distinta a las demás <br>La veo todas las noches <br>Por la playa pasear <br>Y no sé de dónde viene <br>Y no sé a dónde va <br>Hace tiempo que sueño con ella <br>Y solo sé que se llama ____`,
             respuesta: "NOELIA"
           },
           3: {
             texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>
 Giraros hacia el resto de los equipos y cantar el trozo de canción que os ha tocado.<br>
-Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>De día viviré <br>Pensando en tus sonrisas <br>De noche las estrellas me acompañarán <br>Serás como una luz <br>Que alumbre en mi camino <br>Me voy, pero te juro que mañana volveré <br>Al partir, un beso y una flor <br>Un te quiero, una caricia y un adiós <br>Es ligero equipaje <br>Para tan largo viaje <br>Las penas pesan en el ____`,
+Por lo menos uno de los miembros del equipo tiene que cantar<br></span><br>
+De día viviré <br>Pensando en tus sonrisas <br>De noche las estrellas me acompañarán <br>Serás como una luz <br>Que alumbre en mi camino <br>Me voy, pero te juro que mañana volveré <br>Al partir, un beso y una flor <br>Un te quiero, una caricia y un adiós <br>Es ligero equipaje <br>Para tan largo viaje <br>Las penas pesan en el ____`,
             respuesta: "CORAZÓN"
           },
           4: {
             texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>
 Giraros hacia el resto de los equipos y cantar el trozo de canción que os ha tocado.<br>
-Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>Donde brilla el tibio sol <br>Con un nuevo fulgor <br>Dorando las arenas <br>Donde el aire es limpio aún <br>Bajo la suave luz <br>De las estrellas <br>Donde el fuego se hace amor <br>El río es hablador <br>Y el monte selva <br>Hoy encontré un lugar <br>Para los dos en esta nueva ____`,
+Por lo menos uno de los miembros del equipo tiene que cantar<br></span><br>
+Donde brilla el tibio sol <br>Con un nuevo fulgor <br>Dorando las arenas <br>Donde el aire es limpio aún <br>Bajo la suave luz <br>De las estrellas <br>Donde el fuego se hace amor <br>El río es hablador <br>Y el monte selva <br>Hoy encontré un lugar <br>Para los dos en esta nueva ____`,
             respuesta: "TIERRA"
           },
           5: {
             texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>
 Giraros hacia el resto de los equipos y cantar el trozo de canción que os ha tocado.<br>
-Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>Te quiero vida mía, te quiero noche y día <br>No he querido nunca así, te quiero con ternura <br>Con miedo, con locura, solo vivo para ti <br>Yo te seré siempre fiel, pues para mí quiero en flor <br>Ese clavel de tu piel y de tu ____`,
+Por lo menos uno de los miembros del equipo tiene que cantar<br></span><br>
+Te quiero vida mía, te quiero noche y día <br>No he querido nunca así, te quiero con ternura <br>Con miedo, con locura, solo vivo para ti <br>Yo te seré siempre fiel, pues para mí quiero en flor <br>Ese clavel de tu piel y de tu ____`,
             respuesta: "AMOR"
           }
         },
@@ -95,7 +123,7 @@ Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>Te q
         pista: "BUSCA EN UN SALVAVIDAS.",
         clave: "ESTRELLA",
         tema: "groovy3",
-        audio: "http://www.miguel-a.es/ECOS/J-PARDO/JuanpardoMiguitarra.wav"
+        spotify: "https://open.spotify.com/embed/track/2fRQJwZCi3RWJ08As9Qfxa"
       },
       {
         texto: "4. ¿A qué olían los hombres en España? - Andros - Nenuco - Varón Dandy",
@@ -154,6 +182,7 @@ Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>Te q
         <p class="pregunta-texto">${actual.texto}</p>
         ${actual.imagen ? `<img src="${actual.imagen}" alt="Imagen de la pregunta" class="pregunta-img">` : ""}
         ${actual.audio ? `<audio controls><source src="${actual.audio}" type="audio/wav">Tu navegador no soporta audio.</audio>` : ""}
+        ${actual.spotify ? `<iframe class="spotify-player" src="${actual.spotify}" width="300" height="80" allow="encrypted-media"></iframe>` : ""}
         <form id="form-pregunta">
           ${Array.isArray(actual.respuestas)
           ? actual.respuestas.map((_, i) =>
@@ -179,6 +208,7 @@ Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>Te q
           const correcto = respuestas.every(r => valores.includes(r));
 
           if (correcto) {
+            ocultarPregunta();
             mostrarPista(actual);
           } else {
             document.getElementById("mensaje").innerHTML = `<span>❌ Respuesta incorrecta. Intenta de nuevo.</span>`;
@@ -190,12 +220,19 @@ Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>Te q
 
           const valor = input.value.trim().toUpperCase();
           if (valor === actual.respuesta.toUpperCase()) {
+            ocultarPregunta();
             mostrarPista(actual);
           } else {
             document.getElementById("mensaje").innerHTML = `<span>❌ Respuesta incorrecta. Intenta de nuevo.</span>`;
           }
         }
       };
+    }
+
+    function ocultarPregunta() {
+      const contenedor = document.getElementById("contenedor");
+      const elementos = contenedor.querySelectorAll("p.pregunta-texto, img.pregunta-img, audio, iframe.spotify-player, form#form-pregunta");
+      elementos.forEach(el => el.style.display = "none");
     }
 
     function mostrarPista(actual) {
@@ -239,4 +276,5 @@ Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>Te q
     mostrarPregunta();
   </script>
 </body>
+
 </html>

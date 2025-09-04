@@ -3,63 +3,90 @@
 <head>
   <meta charset="UTF-8">
   <title>Juego Años 70</title>
+  <link rel="stylesheet" href="style.css">
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      background: url("img/carta.png") no-repeat center center;
+      background-size: cover;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      background: url("img/carta.png") no-repeat center center;
-      background-size: cover;     
-      background-attachment: fixed; 
-      font-family: Arial, sans-serif;
       text-align: center;
-      color: white;
+      height: 100vh;
     }
 
-    .btn-iniciar {
+    #btnStart {
+      font-size: 2rem;
       padding: 1rem 2rem;
-      font-size: 1.5rem;
       border: none;
-      border-radius: 10px;
-      background: #ff9800;
-      color: white;
+      border-radius: 12px;
+      background-color: #F49F0A;
+      color: #fff;
       cursor: pointer;
-      margin-bottom: 1rem;
-      transition: background 0.3s ease;
-    }
-    .btn-iniciar:hover {
-      background: #e68900;
+      transition: transform 0.2s, background 0.2s;
     }
 
-    .icono-rotar {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 0.5rem;
-      animation: girar 2s infinite alternate ease-in-out;
+    #btnStart:hover {
+      transform: scale(1.1) rotate(-3deg);
+      background-color: #FF6F61;
     }
+
+    .girar-movil {
+      width: 60px;
+      height: 120px;
+      border: 3px solid #fff;
+      border-radius: 15px;
+      margin: 1rem auto;
+      position: relative;
+      animation: girar 2s infinite alternate;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .girar-movil::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      background: #fff;
+      border-radius: 50%;
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
     @keyframes girar {
       0% { transform: rotate(0deg); }
-      100% { transform: rotate(90deg); }
+      100% { transform: rotate(15deg); }
     }
 
-    p {
+    #texto-giro {
+      font-size: 1.5rem;
+      color: #fff;
       margin-top: 0.5rem;
-      font-size: 1.2rem;
+    }
+
+    @media (max-width: 480px) {
+      #btnStart {
+        font-size: 2.5rem;
+        padding: 1.2rem 2.5rem;
+      }
+      #texto-giro {
+        font-size: 1.8rem;
+      }
+      .girar-movil {
+        width: 80px;
+        height: 160px;
+      }
     }
   </style>
 </head>
 <body>
-  <button class="btn-iniciar" id="btnStart">Iniciar ▶</button>
+  <button id="btnStart">Iniciar ▶</button>
 
-  <!-- Icono de móvil que rota -->
-  <svg class="icono-rotar" xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24">
-    <path d="M7 2C5.343 2 4 3.343 4 5v14c0 1.657 1.343 3 3 3h10c1.657 0 3-1.343 3-3V5c0-1.657-1.343-3-3-3H7zm0 2h10c.552 0 1 .448 1 1v14c0 .552-.448 1-1 1H7c-.552 0-1-.448-1-1V5c0-.552.448-1 1-1zm5 16a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/>
-  </svg>
-
-  <p>Para jugar mejor voltear el teléfono</p>
+  <div class="girar-movil"></div>
+  <div id="texto-giro">Para jugar mejor voltear el teléfono</div>
 
   <script>
     document.getElementById("btnStart").addEventListener("click", () => {
