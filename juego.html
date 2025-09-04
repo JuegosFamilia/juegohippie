@@ -182,7 +182,7 @@ Te quiero vida mía, te quiero noche y día <br>No he querido nunca así, te qui
         <p class="pregunta-texto">${actual.texto}</p>
         ${actual.imagen ? `<img src="${actual.imagen}" alt="Imagen de la pregunta" class="pregunta-img">` : ""}
         ${actual.audio ? `<audio controls><source src="${actual.audio}" type="audio/wav">Tu navegador no soporta audio.</audio>` : ""}
-        ${actual.spotify ? `<iframe class="spotify-player" src="${actual.spotify}" width="300" height="80" allow="encrypted-media"></iframe>` : ""}
+        ${actual.spotify ? `<iframe width="560" height="315" src="https://www.youtube.com/embed/vm56JPpGYbY?autoplay=1&controls=0&showinfo=0&modestbranding=1" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>` : ""}
         <form id="form-pregunta">
           ${Array.isArray(actual.respuestas)
           ? actual.respuestas.map((_, i) =>
