@@ -17,7 +17,7 @@ body {
 }
 .groovy3 {
     background-color: #FFD166;
-    color: #FF6F61;
+    color: black;
 }
 .groovy4 {
     background-color: #FF6F61;
@@ -93,6 +93,14 @@ h1, h2, p, label {
     margin-top: 2rem;
 }
 
+.intro-cancion {
+    font-weight: bold;       /* más visible */
+    font-size: 20px;         /* un poco más grande */
+    color: #E63946;          /* color destacado */
+    line-height: 1.6;        /* separación de líneas */
+    display: block;
+    margin-bottom: 1rem;     /* separa de la letra/poema */
+}
 /* Ajuste responsivo */
 @media (max-width: 480px) {
     .botones-piramide {

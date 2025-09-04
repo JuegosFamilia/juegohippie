@@ -2,9 +2,40 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <title>Juego Groovy</title>
+  <title>Juego Años 70</title>
   <link href="https://fonts.googleapis.com/css2?family=Rubik+Vinyl&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
+  <style>
+    input {
+      text-transform: uppercase; /* siempre en mayúsculas */
+    }
+    .pregunta-img {
+      max-width: 80%;
+      border: 4px solid #fff;
+      border-radius: 12px;
+      margin: 1rem auto;
+      display: block;
+    }
+    audio {
+      margin: 1rem 0;
+    }
+    /* Estilo normal para el texto de las preguntas y pistas */
+    .pregunta-texto, .pista-texto {
+      text-shadow: none !important;
+      font-family: 'Rubik', sans-serif;
+      font-size: 18px;
+      color: black;
+      line-height: 1.5;
+      margin: 0.5rem 0;
+    }
+    #mensaje, #mensajeClave {
+      margin-top: 1rem; /* espacio entre respuesta y pista */
+      font-size: 18px;
+    }
+    #mensajeClave {
+      margin-bottom: 1rem; /* separa del siguiente botón */
+    }
+  </style>
 </head>
 <body>
   <div class="page-enter"></div>
@@ -12,53 +43,86 @@
 
   <script>
     const preguntas = [
-      { 
-        texto: "¿A qué olían los hombres en España? ANDROS, NENUCO, VARON DANDY",
-        respuesta: "paris", 
-        pista: "Busca en el PATIO CENTRAL la palabra clave.", 
-        clave: "luna", 
-        tema: "groovy1"
+      {
+        texto: "1. Foto de la época… ¿Sabes quién son?",
+        respuestas: ["JULIO IGLESIAS", "ISABEL PREYSLER"],
+        pista: "BUSCA EN MI PARAÍSO...",
+        clave: "SOL",
+        tema: "groovy1",
+        imagen: "img/boda.jpeg"
       },
-      { 
-        texto: "¿Quién escribió Don Quijote?", 
-        respuesta: "cervantes", 
-        pista: "Ve a la BIBLIOTECA para encontrar la clave.", 
-        clave: "sol", 
+      {
+        // Pregunta 2 con versiones según el equipo
+        versiones: {
+          1: {
+            texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>
+Giraros hacia el resto de los equipos y cantar el trozo de canción que os ha tocado.<br>
+Por lo menos uno de los miembros del equipo tiene que cantar<br></span<br>Libre Como el Sol cuando amanece <br>Yo soy libre como el mar <br>Libre Como el ave que escapó de su prisión <br>Y puede, al fin, volar <br>Libre Como el viento que recoge mi lamento y mi pesar <br>Camino sin cesar <br>Detrás de la verdad <br>Y sabré lo que es al fin, la ____`,
+            respuesta: "LIBERTAD"
+          },
+          2: {
+            texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>
+Giraros hacia el resto de los equipos y cantar el trozo de canción que os ha tocado.<br>
+Por lo menos uno de los miembros del equipo tiene que cantar<br></span><br>Hay una chica que es igual <br>Pero distinta a las demás <br>La veo todas las noches <br>Por la playa pasear <br>Y no sé de dónde viene <br>Y no sé a dónde va <br>Hace tiempo que sueño con ella <br>Y solo sé que se llama ____`,
+            respuesta: "NOELIA"
+          },
+          3: {
+            texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>
+Giraros hacia el resto de los equipos y cantar el trozo de canción que os ha tocado.<br>
+Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>De día viviré <br>Pensando en tus sonrisas <br>De noche las estrellas me acompañarán <br>Serás como una luz <br>Que alumbre en mi camino <br>Me voy, pero te juro que mañana volveré <br>Al partir, un beso y una flor <br>Un te quiero, una caricia y un adiós <br>Es ligero equipaje <br>Para tan largo viaje <br>Las penas pesan en el ____`,
+            respuesta: "CORAZÓN"
+          },
+          4: {
+            texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>
+Giraros hacia el resto de los equipos y cantar el trozo de canción que os ha tocado.<br>
+Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>Donde brilla el tibio sol <br>Con un nuevo fulgor <br>Dorando las arenas <br>Donde el aire es limpio aún <br>Bajo la suave luz <br>De las estrellas <br>Donde el fuego se hace amor <br>El río es hablador <br>Y el monte selva <br>Hoy encontré un lugar <br>Para los dos en esta nueva ____`,
+            respuesta: "TIERRA"
+          },
+          5: {
+            texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>
+Giraros hacia el resto de los equipos y cantar el trozo de canción que os ha tocado.<br>
+Por lo menos uno de los miembros del equipo tiene que cantar<br></span> <br>Te quiero vida mía, te quiero noche y día <br>No he querido nunca así, te quiero con ternura <br>Con miedo, con locura, solo vivo para ti <br>Yo te seré siempre fiel, pues para mí quiero en flor <br>Ese clavel de tu piel y de tu ____`,
+            respuesta: "AMOR"
+          }
+        },
+        pista: "BUSCA DETRÁS DE MI ALMA....",
+        clave: "LUNA",
         tema: "groovy2"
       },
-      { 
-        texto: "¿Cuánto es 7 x 8?", 
-        respuesta: "56", 
-        pista: "La pista está en el GIMNASIO.", 
-        clave: "estrella", 
-        tema: "groovy3"
+      {
+        texto: "3. Escuchar un trozo de canción y decir quién la canta?",
+        respuesta: "JUAN PARDO",
+        pista: "BUSCA EN UN SALVAVIDAS.",
+        clave: "ESTRELLA",
+        tema: "groovy3",
+        audio: "http://www.miguel-a.es/ECOS/J-PARDO/JuanpardoMiguitarra.wav"
       },
-      { 
-        texto: "¿Cuál es el océano más grande?", 
-        respuesta: "pacifico", 
-        pista: "Revisa el SALÓN DE ARTE.", 
-        clave: "mariposa", 
+      {
+        texto: "4. ¿A qué olían los hombres en España? - Andros - Nenuco - Varón Dandy",
+        respuesta: "VARóN DANDY",
+        pista: "BUSCA EN UN POSTE QUE TENGA MUCHAS BANDERAS",
+        clave: "MARIPOSA",
         tema: "groovy4"
       },
-      { 
-        texto: "¿En qué año llegó el hombre a la Luna?", 
-        respuesta: "1969", 
-        pista: "Pista escondida en el LABORATORIO.", 
-        clave: "flor", 
+      {
+        texto: "5. ¿Cómo se llamaban los payasos de la tele?",
+        respuestas: ["GABI", "FOFO", "MILIKI"],
+        pista: "BUSCA LA CLAVE EN UNA MACETA.",
+        clave: "FLOR",
         tema: "groovy5"
       }
     ];
 
     const ordenEquipos = {
-      1: [0,1,2,3,4],
-      2: [2,3,1,4,0],
-      3: [4,2,0,1,3],
-      4: [1,4,3,0,2],
-      5: [3,0,4,2,1]
+      1: [0, 1, 2, 3, 4],
+      2: [2, 3, 1, 4, 0],
+      3: [4, 2, 0, 1, 3],
+      4: [1, 4, 3, 0, 2],
+      5: [3, 0, 4, 2, 1]
     };
 
     const equipo = localStorage.getItem("equipo");
-    let indice = parseInt(localStorage.getItem("indicePregunta"));
+    let indice = parseInt(localStorage.getItem("indicePregunta")) || 0;
     const orden = ordenEquipos[equipo];
 
     function mostrarPregunta() {
@@ -67,18 +131,36 @@
           <h2>🌼 ¡Juego terminado! 🌼</h2>
           <p>¡Buen trabajo, Equipo ${equipo}!</p>
         `;
-        document.body.className = ""; // quitar fondo
+        document.body.className = "";
         return;
       }
 
-      const actual = preguntas[orden[indice]];
-      document.body.className = actual.tema; // fondo groovy distinto
+      const actualPregunta = preguntas[orden[indice]];
+
+      const actual = actualPregunta.versiones
+        ? {
+          texto: actualPregunta.versiones[equipo].texto,
+          respuesta: actualPregunta.versiones[equipo].respuesta,
+          pista: actualPregunta.pista,
+          clave: actualPregunta.clave,
+          tema: actualPregunta.tema
+        }
+        : actualPregunta;
+
+      document.body.className = actual.tema;
 
       document.getElementById("contenedor").innerHTML = `
-        <h2>Pregunta ${indice+1}</h2>
-        <p>${actual.texto}</p>
+        <h2>Pregunta ${indice + 1}</h2>
+        <p class="pregunta-texto">${actual.texto}</p>
+        ${actual.imagen ? `<img src="${actual.imagen}" alt="Imagen de la pregunta" class="pregunta-img">` : ""}
+        ${actual.audio ? `<audio controls><source src="${actual.audio}" type="audio/wav">Tu navegador no soporta audio.</audio>` : ""}
         <form id="form-pregunta">
-          <input type="text" id="respuesta" placeholder="Tu respuesta">
+          ${Array.isArray(actual.respuestas)
+          ? actual.respuestas.map((_, i) =>
+            `<input type="text" id="respuesta${i + 1}" placeholder="Respuesta ${i + 1}">`
+          ).join("")
+          : `<input type="text" id="respuesta" placeholder="Tu respuesta">`
+        }
           <button type="submit">Enviar</button>
         </form>
         <div id="mensaje"></div>
@@ -86,31 +168,56 @@
 
       document.getElementById("form-pregunta").onsubmit = (e) => {
         e.preventDefault();
-        const valor = document.getElementById("respuesta").value.trim().toLowerCase();
-        if (valor === actual.respuesta) {
-          document.getElementById("mensaje").innerHTML = `
-            ✅ Correcto.<br>
-            ${actual.pista}<br><br>
-            <form id="form-clave">
-              <input type="text" id="clave" placeholder="Introduce la clave encontrada">
-              <button type="submit">Desbloquear</button>
-            </form>
-            <div id="mensajeClave"></div>
-          `;
-          document.getElementById("form-clave").onsubmit = (ev) => {
-            ev.preventDefault();
-            const clave = document.getElementById("clave").value.trim().toLowerCase();
-            if (clave === actual.clave) {
-              document.getElementById("mensajeClave").innerHTML = `
-                ✅ ¡Clave correcta!<br>
-                <button onclick="siguiente()">Siguiente pregunta</button>
-              `;
-            } else {
-              document.getElementById("mensajeClave").innerText = "❌ Clave incorrecta, revisa la pista.";
-            }
-          };
+
+        if (Array.isArray(actual.respuestas)) {
+          const valores = actual.respuestas.map((_, i) =>
+            document.getElementById(`respuesta${i + 1}`).value.trim().toUpperCase()
+          );
+
+          const respuestas = actual.respuestas.map(r => r.toUpperCase());
+
+          const correcto = respuestas.every(r => valores.includes(r));
+
+          if (correcto) {
+            mostrarPista(actual);
+          } else {
+            document.getElementById("mensaje").innerHTML = `<span>❌ Respuesta incorrecta. Intenta de nuevo.</span>`;
+          }
+
         } else {
-          document.getElementById("mensaje").innerText = "❌ Respuesta incorrecta. Intenta de nuevo.";
+          const input = document.getElementById("respuesta");
+          if (!input) return;
+
+          const valor = input.value.trim().toUpperCase();
+          if (valor === actual.respuesta.toUpperCase()) {
+            mostrarPista(actual);
+          } else {
+            document.getElementById("mensaje").innerHTML = `<span>❌ Respuesta incorrecta. Intenta de nuevo.</span>`;
+          }
+        }
+      };
+    }
+
+    function mostrarPista(actual) {
+      document.getElementById("mensaje").innerHTML = `
+        <div class="mensaje-correcto">✅ Correcto.</div>
+        <div class="pista-texto">${actual.pista}</div><br>
+        <form id="form-clave">
+          <input type="text" id="clave" placeholder="Introduce la clave encontrada">
+          <button type="submit">Desbloquear</button>
+        </form>
+        <div id="mensajeClave"></div>
+      `;
+      document.getElementById("form-clave").onsubmit = (ev) => {
+        ev.preventDefault();
+        const clave = document.getElementById("clave").value.trim().toUpperCase();
+        if (clave === actual.clave.toUpperCase()) {
+          document.getElementById("mensajeClave").innerHTML = `
+            <div class="mensaje-correcto">✅ ¡Clave correcta!</div>
+            <button onclick="siguiente()">Siguiente pregunta</button>
+          `;
+        } else {
+          document.getElementById("mensajeClave").innerHTML = `<span>❌ Clave incorrecta, revisa la pista.</span>`;
         }
       };
     }
