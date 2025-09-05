@@ -28,6 +28,24 @@ body {
     color: #FFD166;
 }
 
+/* 🌊 groovy6 → tonos azules, mar y libertad */
+.groovy6 {
+    background-color: #4CC9F0; /* azul eléctrico */
+    color: #03045E;           /* azul profundo */
+}
+
+/* 🌈 groovy7 → psicodelia, púrpura + fucsia */
+.groovy7 {
+    background-color: #9B5DE5; /* morado brillante */
+    color: #FF99AC;            /* rosa hippie */
+}
+
+/* 🌸 groovy8 → flores, naturaleza y paz */
+.groovy8 {
+    background-color: #06D6A0; /* verde turquesa */
+    color: #FFD166;            /* amarillo cálido */
+}
+
 /* Cortina retro */
 .page-enter {
     position: fixed;

@@ -14,9 +14,11 @@
     <button class="groovy3" onclick="elegirEquipo(3)">Equipo Harmony and understanding</button>
     <button class="groovy4" onclick="elegirEquipo(4)">Equipo Sympathy and trust</button>
     <button class="groovy5" onclick="elegirEquipo(5)">Equipo Mind's true liberation</button>
+    <button class="groovy6" onclick="elegirEquipo(6)">Equipo Mystic crystal revelation</button>
+    <button class="groovy7" onclick="elegirEquipo(7)">Equipo Golden living dreams</button>
+    <button class="groovy8" onclick="elegirEquipo(8)">Equipo Peace and love</button>
   </div>
   
-
   <!-- Audio: se reproducirá en loop -->
   <audio id="themeAudio" src="Aquarius__Let_The_Sun_Shine_In.mp3" autoplay loop></audio>
 
@@ -27,15 +29,12 @@
       window.location.href = "juego.html";
     }
 
-   
-  const audio = document.getElementById('themeAudio');
-
-  audio.addEventListener('loadedmetadata', () => {
-    // Tiempo de inicio en segundos
-    audio.currentTime = 25; 
-    audio.play().catch(e => console.log("Audio bloqueado:", e));
-  });
-</script>
-
+    const audio = document.getElementById('themeAudio');
+    audio.addEventListener('loadedmetadata', () => {
+      // Tiempo de inicio en segundos
+      audio.currentTime = 25; 
+      audio.play().catch(e => console.log("Audio bloqueado:", e));
+    });
+  </script>
 </body>
 </html>
