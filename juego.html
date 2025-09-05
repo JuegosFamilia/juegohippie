@@ -105,7 +105,7 @@ function mostrarPregunta() {
   if(actual.audio){
     const audioElem=document.getElementById("audioPregunta");
     audioElem.addEventListener('loadedmetadata', ()=>{
-      audioElem.currentTime=75; // empieza en 1:15
+      audioElem.currentTime=60;
       audioElem.play().catch(e=>console.log("Audio bloqueado:",e));
     });
   }
