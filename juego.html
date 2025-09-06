@@ -34,7 +34,7 @@ const preguntas = [
       5: { texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>Te quiero vida mía, te quiero noche y día <br>No he querido nunca así, te quiero con ternura <br>Con miedo, con locura, solo vivo para ti <br>Yo te seré siempre fiel, pues para mí quiero en flor <br>Ese clavel de tu piel y de tu ____</span>`, respuesta: "AMOR" }
     }, pista: "BUSCA DETRÁS DE MI ALMA....", clave: "LUNA", tema: "groovy2"
   },
-  { texto: "3. Escuchar un trozo de canción y decir quién la canta?", respuesta: "JUAN PARDO", pista: "BUSCA EN UN SALVAVIDAS.", clave: "ESTRELLA", tema: "groovy3", audio: "cancion.m4a", inicio: 75 },
+  { texto: "3. Escuchar un trozo de canción y decir quién la canta?", respuesta: "JUAN PARDO", pista: "BUSCA EN UN SALVAVIDAS.", clave: "ESTRELLA", tema: "groovy3", audio: "canciona.m4a", inicio: 75 },
   { texto: "4. ¿A qué olían los hombres en España? - Andros - Nenuco - Varón Dandy", respuesta: "VARÓN DANDY", pista: "BUSCA EN UN POSTE QUE TENGA MUCHAS BANDERAS", clave: "MARIPOSA", tema: "groovy4" },
   { texto: "5. ¿Cómo se llamaban los payasos de la tele?", respuestas: ["GABI","FOFO","MILIKI"], pista: "BUSCA LA CLAVE EN UNA MACETA.", clave: "FLOR", tema: "groovy5" },
   { texto: "6. Hula hoop, prueba realizada", accion: true, pista: "BUSCA LA CLAVE EN UN CARTEL DE BIENVENIDA", clave: "MAR", tema: "groovy6", youtube: "https://www.youtube.com/watch?v=iK1cgkeRiXE" },
@@ -44,7 +44,16 @@ const preguntas = [
   { texto: "10. En el panel de fotos, hay tres imágenes de bebés. Tenéis que decir quién es quién: <br>Detrás cada foto tiene un número", nombres: true, pista: "BUSCA LA CLAVE EN UNA SOMBRILLA.", clave: "FAMILIA", tema: "groovy2" }
 ];
 
-const ordenEquipos = {1:[0,1,2,3,4,5,6,7,8,9],2:[1,2,3,4,5,6,7,8,9,0],3:[2,3,4,5,6,7,8,9,0,1],4:[3,4,5,6,7,8,9,0,1,2],5:[4,5,6,7,8,9,0,1,2,3],6:[5,6,7,8,9,0,1,2,3,4],7:[6,7,8,9,0,1,2,3,4,5],8:[7,8,9,0,1,2,3,4,5,6]};
+const ordenEquipos = {
+  1: [0,3,5,7,1,9,2,4,8,6],
+  2: [1,4,6,8,2,0,3,5,7,9],
+  3: [2,5,7,9,3,1,4,6,8,0],
+  4: [3,6,8,0,4,2,5,7,9,1],
+  5: [4,7,9,1,5,3,6,8,0,2],
+  6: [5,8,0,2,6,4,7,9,1,3],
+  7: [6,9,1,3,7,5,8,0,2,4],
+  8: [7,0,2,4,8,6,9,1,3,5]
+};
 
 let equipo = parseInt(localStorage.getItem("equipo")) || 1; // ahora número
 let indice = parseInt(localStorage.getItem("indicePregunta")) || 0;
@@ -60,7 +69,14 @@ function mostrarPregunta(){
   const actualPregunta = preguntas[orden[indice]];
   if(!actualPregunta) return;
 
-  const actual = actualPregunta.versiones ? actualPregunta.versiones[equipo] : actualPregunta; // <-- corrección
+  const actual = actualPregunta.versiones
+  ? {
+      ...actualPregunta.versiones[equipo], // texto y respuesta
+      pista: actualPregunta.pista,         // pista global
+      clave: actualPregunta.clave,         // clave global
+      tema: actualPregunta.tema            // tema global
+    }
+  : actualPregunta;
 
   document.body.className = actual.tema;
 
