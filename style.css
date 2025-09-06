@@ -43,7 +43,7 @@ body {
 /* 🌸 groovy8 → flores, naturaleza y paz */
 .groovy8 {
     background-color: #06D6A0; /* verde turquesa */
-    color: #FFD166;            /* amarillo cálido */
+    color: black;            /* amarillo cálido */
 }
 
 /* Cortina retro */
@@ -131,6 +131,39 @@ h1, h2, p, label {
     .botones-piramide button:nth-child(5) {
         grid-column: auto;
     }
+}
+
+#contenedor input[type="text"] {
+  width: 200px;        /* ancho fijo */
+  padding: 6px 8px;    /* espacio interno */
+  font-size: 16px;     /* tamaño de fuente consistente */
+  border-radius: 6px;  /* bordes redondeados */
+  border: 1px solid #ccc; /* borde estándar */
+  box-sizing: border-box; /* para que el padding no agrande el input */
+  margin-bottom: 8px;  /* espacio entre inputs */
+  text-transform: uppercase;
+}
+
+
+
+#form-pregunta label {
+  font-weight: normal;   /* letra normal, no inflada */
+  font-size: 16px;
+  margin-right: 8px;
+}
+
+#form-pregunta input {
+  width: 40px;           /* input más pequeño */
+  font-size: 16px;
+  text-align: center;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 2px solid #E63946;
+  font-size: 16px;
+  text-align: center;
 }
 
 

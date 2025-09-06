@@ -14,142 +14,157 @@
     #mensajeClave { margin-bottom: 1rem; }
     .intro-cancion { font-weight: bold; font-size: 20px; color: #333; }
     .mensaje-correcto { font-weight: bold; font-size: 20px; margin-bottom: 1rem; color: green; }
+    .seleccion-num { font-weight: bold; margin-left: 10px; }
+    .num-btn { margin: 0 5px; }
   </style>
 </head>
 <body>
-<div class="page-enter"></div>
-<div id="contenedor"></div>
+  <div class="page-enter"></div>
+  <div id="contenedor"></div>
 
 <script>
 const preguntas = [
-  { texto: "1. Foto de la época… ¿Sabes quién son?", respuestas: ["JULIO IGLESIAS","ISABEL PREYSLER"], pista:"BUSCA EN MI PARAÍSO...", clave:"SOL", tema:"groovy1", imagen:"img/boda.jpeg" },
-  { versiones: {
-      1:{ texto: `<span class="intro-cancion">¡¡Hora de cantar!!</span><br> Libre Como el Sol cuando amanece...`, respuesta:"LIBERTAD" },
-      2:{ texto: `<span class="intro-cancion">¡¡Hora de cantar!!</span><br> Hay una chica que es igual...`, respuesta:"NOELIA" },
-      3:{ texto: `<span class="intro-cancion">¡¡Hora de cantar!!</span><br> De día viviré pensando en tus sonrisas...`, respuesta:"CORAZÓN" },
-      4:{ texto: `<span class="intro-cancion">¡¡Hora de cantar!!</span><br> Donde brilla el tibio sol...`, respuesta:"TIERRA" },
-      5:{ texto: `<span class="intro-cancion">¡¡Hora de cantar!!</span><br> Te quiero vida mía, te quiero noche y día...`, respuesta:"AMOR" }
-    }, pista:"BUSCA DETRÁS DE MI ALMA....", clave:"LUNA", tema:"groovy2"
+  { texto: "1. Foto de la época… ¿Sabes quién son?", respuestas: ["JULIO IGLESIAS","ISABEL PREYSLER"], pista: "BUSCA EN MI PARAÍSO...", clave: "SOL", tema: "groovy1", imagen: "img/boda.jpeg"},
+  {
+    versiones: {
+      1: { texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>Libre Como el Sol cuando amanece <br>Yo soy libre como el mar <br>Libre Como el ave que escapó de su prisión <br>Y puede, al fin, volar <br>Libre Como el viento que recoge mi lamento y mi pesar <br>Camino sin cesar <br>Detrás de la verdad <br>Y sabré lo que es al fin, la ____</span>`, respuesta: "LIBERTAD" },
+      2: { texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>Hay una chica que es igual <br>Pero distinta a las demás <br>La veo todas las noches <br>Por la playa pasear <br>Y no sé de dónde viene <br>Y no sé a dónde va <br>Hace tiempo que sueño con ella <br>Y solo sé que se llama ____</span>`, respuesta: "NOELIA" },
+      3: { texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>De día viviré <br>Pensando en tus sonrisas <br>De noche las estrellas me acompañarán <br>Serás como una luz <br>Que alumbre en mi camino <br>Me voy, pero te juro que mañana volveré <br>Al partir, un beso y una flor <br>Un te quiero, una caricia y un adiós <br>Es ligero equipaje <br>Para tan largo viaje <br>Las penas pesan en el ____</span>`, respuesta: "CORAZÓN" },
+      4: { texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>Donde brilla el tibio sol <br>Con un nuevo fulgor <br>Dorando las arenas <br>Donde el aire es limpio aún <br>Bajo la suave luz <br>De las estrellas <br>Donde el fuego se hace amor <br>El río es hablador <br>Y el monte selva <br>Hoy encontré un lugar <br>Para los dos en esta nueva ____</span>`, respuesta: "TIERRA" },
+      5: { texto: `<span class="intro-cancion">¡¡Hora de cantar!!<br>Te quiero vida mía, te quiero noche y día <br>No he querido nunca así, te quiero con ternura <br>Con miedo, con locura, solo vivo para ti <br>Yo te seré siempre fiel, pues para mí quiero en flor <br>Ese clavel de tu piel y de tu ____</span>`, respuesta: "AMOR" }
+    }, pista: "BUSCA DETRÁS DE MI ALMA....", clave: "LUNA", tema: "groovy2"
   },
-  { texto:"3. Escuchar un trozo de canción y decir quién la canta?", respuesta:"JUAN PARDO", pista:"BUSCA EN UN SALVAVIDAS.", clave:"ESTRELLA", tema:"groovy3", audio:"cancion.m4a" },
-  { texto:"4. ¿A qué olían los hombres en España? - Andros - Nenuco - Varón Dandy", respuesta:"VARÓN DANDY", pista:"BUSCA EN UN POSTE QUE TENGA MUCHAS BANDERAS", clave:"MARIPOSA", tema:"groovy4" },
-  { texto:"5. ¿Cómo se llamaban los payasos de la tele?", respuestas:["GABI","FOFO","MILIKI"], pista:"BUSCA LA CLAVE EN UNA MACETA.", clave:"FLOR", tema:"groovy5" },
-  { texto:"6. Hula hoop, prueba realizada", accion:true, pista:"BUSCA LA CLAVE EN UNA MACETA.", clave:"MAR", tema:"groovy6", youtube:"https://www.youtube.com/watch?v=iK1cgkeRiXE" },
-  { texto:`7. ¿Con qué se divertían los niños en esa época?<br>
-          <span style="font-size:22px; letter-spacing:6px;">C _ N _ _ _ _</span><br>
-          <button id="btnPista" type="button">Pista</button>
-          <div id="cajaPista" style="display:none; margin-top:10px;">
-            <img src="img/cinecin.jpg" alt="Pista: juguete de los 70" style="max-width:250px; border:2px solid #333; border-radius:8px;">
-          </div>`, respuesta:"CINECIN", pista:"BUSCA LA CLAVE EN UNA MACETA.", clave:"ARCOIRIS", tema:"groovy7" },
-  { texto:"8. Se declaró por primera vez el 8 de marzo como Día internacional de la mujer en el año...", respuestas:["1978","1975","1973"], multiple:true, pista:"BUSCA LA CLAVE EN UNA MACETA.", clave:"PAZ", tema:"groovy8" },
-  { texto:"9. Qué exitosa película se estrenaba en esta década.", respuestas:["Cazafantasmas","Star wars","Terminator"], pista:"BUSCA LA CLAVE EN UNA MACETA.", clave:"LUZ", tema:"groovy1", imagen:"img/boda.jpeg" },
-  { texto:"10. En el panel de fotos, hay tres imágenes de bebés. Tenéis que decir quién es quién:", respuestas:["ANNI","MAYTE","PILAR"], nombres:true, pista:"BUSCA LA CLAVE EN EL PANEL DE FOTOS.", clave:"FAMILIA", tema:"groovy2", imagen:"img/bebes.jpg" }
+  { texto: "3. Escuchar un trozo de canción y decir quién la canta?", respuesta: "JUAN PARDO", pista: "BUSCA EN UN SALVAVIDAS.", clave: "ESTRELLA", tema: "groovy3", audio: "cancion.m4a", inicio: 75 },
+  { texto: "4. ¿A qué olían los hombres en España? - Andros - Nenuco - Varón Dandy", respuesta: "VARÓN DANDY", pista: "BUSCA EN UN POSTE QUE TENGA MUCHAS BANDERAS", clave: "MARIPOSA", tema: "groovy4" },
+  { texto: "5. ¿Cómo se llamaban los payasos de la tele?", respuestas: ["GABI","FOFO","MILIKI"], pista: "BUSCA LA CLAVE EN UNA MACETA.", clave: "FLOR", tema: "groovy5" },
+  { texto: "6. Hula hoop, prueba realizada", accion: true, pista: "BUSCA LA CLAVE EN UNA MACETA.", clave: "MAR", tema: "groovy6", youtube: "https://www.youtube.com/watch?v=iK1cgkeRiXE" },
+  { texto: `7. ¿Con qué se divertían los niños en esa época?<br><span style="font-size:22px; letter-spacing:6px;">C _ N _ _ _ _</span><br><button id="btnPista" type="button">Pista</button><div id="cajaPista" style="display:none; margin-top:10px;"><img src="img/ninios.png" alt="Pista" style="max-width:250px; border:2px solid #333; border-radius:8px;"></div>`, respuesta: "CINEXIN", pista: "BUSCA LA CLAVE EN UNA MACETA.", clave: "ARCOIRIS", tema: "groovy7" },
+  { texto: "8. Se declaró por primera vez el 8 de marzo como Día internacional de la mujer en el año... <br>-1978 <br>-1975 <br>-1973", respuesta: "1975", pista: "BUSCA LA CLAVE EN UNA MACETA.", clave: "PAZ", tema: "groovy8" },
+  { texto: "9. Qué exitosa película se estrenaba en esta década. <br>Cazafantasmas <br>Star wars <br>Terminator", respuesta: "Star wars", pista: "BUSCA LA CLAVE EN UNA MACETA.", clave: "LUZ", tema: "groovy1" },
+  { texto: "10. En el panel de fotos, hay tres imágenes de bebés. Tenéis que decir quién es quién: <br>Detrás cada foto tiene un número", nombres: true, pista: "BUSCA LA CLAVE EN EL PANEL DE FOTOS.", clave: "FAMILIA", tema: "groovy2" }
 ];
 
-const ordenEquipos = {
-  1:[0,1,2,3,4,5,6,7,8,9,10],
-  2:[1,2,3,4,5,6,7,8,9,10,0],
-  3:[2,3,4,5,6,7,8,9,10,0,1],
-  4:[3,4,5,6,7,8,9,10,0,1,2],
-  5:[4,5,6,7,8,9,10,0,1,2,3],
-  6:[5,6,7,8,9,10,0,1,2,3,4],
-  7:[6,7,8,9,10,0,1,2,3,4,5],
-  8:[7,8,9,10,0,1,2,3,4,5,6]
-};
+const ordenEquipos = {1:[0,1,2,3,4,5,6,7,8,9],2:[1,2,3,4,5,6,7,8,9,0],3:[2,3,4,5,6,7,8,9,0,1],4:[3,4,5,6,7,8,9,0,1,2],5:[4,5,6,7,8,9,0,1,2,3],6:[5,6,7,8,9,0,1,2,3,4],7:[6,7,8,9,0,1,2,3,4,5],8:[7,8,9,0,1,2,3,4,5,6]};
 
-const equipo = localStorage.getItem("equipo");
+let equipo = parseInt(localStorage.getItem("equipo")) || 1; // ahora número
 let indice = parseInt(localStorage.getItem("indicePregunta")) || 0;
 const orden = ordenEquipos[equipo];
 
-function mostrarPregunta() {
-  if(indice>=orden.length){
+function mostrarPregunta(){
+  if(!orden || indice>=orden.length){
     document.getElementById("contenedor").innerHTML=`<h2>🌼 ¡Juego terminado! 🌼</h2><p>¡Buen trabajo, Equipo ${equipo}!</p>`;
     document.body.className="";
     return;
   }
 
   const actualPregunta = preguntas[orden[indice]];
-  const actual = actualPregunta.versiones ? {
-    texto: actualPregunta.versiones[equipo].texto,
-    respuesta: actualPregunta.versiones[equipo].respuesta,
-    pista: actualPregunta.pista,
-    clave: actualPregunta.clave,
-    tema: actualPregunta.tema
-  } : actualPregunta;
+  if(!actualPregunta) return;
 
-  document.body.className=actual.tema;
+  const actual = actualPregunta.versiones ? actualPregunta.versiones[equipo] : actualPregunta; // <-- corrección
 
-  let contenidoExtra="";
-  if(actual.imagen) contenidoExtra+=`<img src="${actual.imagen}" class="pregunta-img">`;
+  document.body.className = actual.tema;
+
+  let contenidoExtra = "";
+  if(actual.imagen) contenidoExtra=`<img src="${actual.imagen}" class="pregunta-img">`;
   if(actual.youtube) contenidoExtra+=`<iframe width="560" height="315" src="${actual.youtube.replace("watch?v=","embed/")}" allowfullscreen></iframe>`;
   if(actual.accion) contenidoExtra+=`<button id="btnAccion">Prueba realizada</button>`;
   if(actual.audio) contenidoExtra+=`<audio id="audioPregunta" controls><source src="${actual.audio}" type="audio/mp3">Tu navegador no soporta audio.</audio>`;
+
+  let formHTML = '';
+  if(!actual.accion){
+    if(actual.nombres){
+      formHTML = `
+        <form id="form-pregunta">
+          <div><label>Anni:</label>
+            <button type="button" class="num-btn" data-nombre="ANNI" data-num="1">1</button>
+            <button type="button" class="num-btn" data-nombre="ANNI" data-num="2">2</button>
+            <button type="button" class="num-btn" data-nombre="ANNI" data-num="3">3</button>
+            <span class="seleccion-num" id="selANNI"></span>
+          </div>
+          <div><label>Mayte:</label>
+            <button type="button" class="num-btn" data-nombre="MAYTE" data-num="1">1</button>
+            <button type="button" class="num-btn" data-nombre="MAYTE" data-num="2">2</button>
+            <button type="button" class="num-btn" data-nombre="MAYTE" data-num="3">3</button>
+            <span class="seleccion-num" id="selMAYTE"></span>
+          </div>
+          <div><label>Pilar:</label>
+            <button type="button" class="num-btn" data-nombre="PILAR" data-num="1">1</button>
+            <button type="button" class="num-btn" data-nombre="PILAR" data-num="2">2</button>
+            <button type="button" class="num-btn" data-nombre="PILAR" data-num="3">3</button>
+            <span class="seleccion-num" id="selPILAR"></span>
+          </div>
+          <button type="submit">Enviar</button>
+        </form>`;
+    } else if(Array.isArray(actual.respuestas)){
+      formHTML=`<form id="form-pregunta">`+actual.respuestas.map((_,i)=>`<input type="text" id="respuesta${i+1}" placeholder="Respuesta ${i+1}">`).join('')+`<button type="submit">Enviar</button></form>`;
+    } else if(actual.respuesta){
+      formHTML=`<form id="form-pregunta"><input type="text" id="respuesta" placeholder="Tu respuesta"><button type="submit">Enviar</button></form>`;
+    }
+  }
 
   document.getElementById("contenedor").innerHTML=`
     <h2>Pregunta ${indice+1}</h2>
     <p class="pregunta-texto">${actual.texto}</p>
     ${contenidoExtra}
-    ${!actual.accion ? `
-      <form id="form-pregunta">
-        ${actual.nombres ? `
-          <label>Anni:</label><input type="text" id="respAnni" placeholder="Anni"><br>
-          <label>Mayte:</label><input type="text" id="respMayte" placeholder="Mayte"><br>
-          <label>Pilar:</label><input type="text" id="respPilar" placeholder="Pilar"><br>
-          <button type="submit">Enviar</button>
-        ` : Array.isArray(actual.respuestas) ? actual.respuestas.map((_,i)=>`<input type="text" id="respuesta${i+1}" placeholder="Respuesta ${i+1}">`).join("") + `<button type="submit">Enviar</button>` : (actual.respuesta? `<input type="text" id="respuesta" placeholder="Tu respuesta"><button type="submit">Enviar</button>` :"")}
-      </form>` : ""}
+    ${formHTML}
     <div id="mensaje"></div>
   `;
 
-  // Audio local con inicio en cierto minuto
   if(actual.audio){
     const audioElem=document.getElementById("audioPregunta");
-    audioElem.addEventListener('loadedmetadata', ()=>{
-      audioElem.currentTime=60;
-      audioElem.play().catch(e=>console.log("Audio bloqueado:",e));
-    });
+    audioElem.addEventListener('loadedmetadata',()=>{ audioElem.currentTime=75; audioElem.play().catch(()=>{}); });
   }
 
-  // Botón hula hoop
   if(actual.accion){
-    document.getElementById("btnAccion").onclick=()=>{ mostrarPista(actual); };
+    document.getElementById("btnAccion").onclick=()=>mostrarPista(actual);
   }
 
-  // Botón pista letra
   const btnPista=document.getElementById("btnPista");
-  if(btnPista){
-    btnPista.onclick=()=>{ document.getElementById("cajaPista").style.display="block"; };
-  }
+  if(btnPista) btnPista.onclick=()=>document.getElementById("cajaPista").style.display="block";
 
-  // Formulario de respuestas
   const form=document.getElementById("form-pregunta");
   if(form){
-    form.onsubmit=(e)=>{
-      e.preventDefault();
-      let correcto=false;
-      if(actual.nombres){
-        const a=document.getElementById("respAnni").value.trim().toUpperCase();
-        const m=document.getElementById("respMayte").value.trim().toUpperCase();
-        const p=document.getElementById("respPilar").value.trim().toUpperCase();
-        correcto=(a==="ANNI" && m==="MAYTE" && p==="PILAR");
-      } else if(Array.isArray(actual.respuestas)){
+    if(actual.nombres){
+      const seleccion={ANNI:null,MAYTE:null,PILAR:null};
+      form.querySelectorAll(".num-btn").forEach(btn=>{
+        btn.addEventListener("click",()=>{
+          const nombre=btn.dataset.nombre;
+          const num=btn.dataset.num;
+          seleccion[nombre]=num;
+          document.getElementById("sel"+nombre).textContent=`→ ${num}`;
+        });
+      });
+      form.onsubmit=(e)=>{
+        e.preventDefault();
+        const correcto=(seleccion.ANNI==="3" && seleccion.MAYTE==="1" && seleccion.PILAR==="2");
+        if(correcto){ ocultarPregunta(); mostrarPista(actual); }
+        else document.getElementById("mensaje").innerHTML=`<span>❌ Respuesta incorrecta. Intenta de nuevo.</span>`;
+      };
+    } else if(Array.isArray(actual.respuestas)){
+      form.onsubmit=(e)=>{
+        e.preventDefault();
         const valores=actual.respuestas.map((_,i)=>document.getElementById(`respuesta${i+1}`).value.trim().toUpperCase());
         const respuestas=actual.respuestas.map(r=>r.toUpperCase());
-        correcto=respuestas.every(r=>valores.includes(r));
-      } else if(actual.respuesta){
+        const correcto=respuestas.every(r=>valores.includes(r));
+        if(correcto){ ocultarPregunta(); mostrarPista(actual); }
+        else document.getElementById("mensaje").innerHTML=`<span>❌ Respuesta incorrecta. Intenta de nuevo.</span>`;
+      };
+    } else if(actual.respuesta){
+      form.onsubmit=(e)=>{
+        e.preventDefault();
         const val=document.getElementById("respuesta").value.trim().toUpperCase();
-        correcto=(val===actual.respuesta.toUpperCase());
-      }
-      if(correcto) ocultarPregunta(), mostrarPista(actual);
-      else document.getElementById("mensaje").innerHTML=`<span>❌ Respuesta incorrecta. Intenta de nuevo.</span>`;
-    };
+        const correcto=(val===actual.respuesta.toUpperCase());
+        if(correcto){ ocultarPregunta(); mostrarPista(actual); }
+        else document.getElementById("mensaje").innerHTML=`<span>❌ Respuesta incorrecta. Intenta de nuevo.</span>`;
+      };
+    }
   }
 }
 
 function ocultarPregunta(){
   const contenedor=document.getElementById("contenedor");
-  const elems=contenedor.querySelectorAll("p.pregunta-texto, img.pregunta-img, audio, iframe, form#form-pregunta, button#btnAccion, span");
-  elems.forEach(el=>el.style.display="none");
+  const elementos=contenedor.querySelectorAll("p.pregunta-texto,img.pregunta-img,audio,iframe,form#form-pregunta,button#btnAccion");
+  elementos.forEach(el=>el.style.display="none");
 }
 
 function mostrarPista(actual){
@@ -167,7 +182,9 @@ function mostrarPista(actual){
     const clave=document.getElementById("clave").value.trim().toUpperCase();
     if(clave===actual.clave.toUpperCase()){
       document.getElementById("mensajeClave").innerHTML=`<div class="mensaje-correcto">✅ ¡Clave correcta!</div><button onclick="siguiente()">Siguiente pregunta</button>`;
-    }else document.getElementById("mensajeClave").innerHTML=`<span>❌ Clave incorrecta, revisa la pista.</span>`;
+    } else {
+      document.getElementById("mensajeClave").innerHTML=`<span>❌ Clave incorrecta, revisa la pista.</span>`;
+    }
   };
 }
 
